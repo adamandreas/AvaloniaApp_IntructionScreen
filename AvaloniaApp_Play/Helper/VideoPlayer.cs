@@ -3,8 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Windows;
-using System.Windows.Controls; 
+using Avalonia.Interactivity;
+using Avalonia.Controls;
 using UDA.Shared;
 
 namespace UDA.InstructionScreen.Helper;
@@ -16,10 +16,10 @@ public class VideoPlayer : IDisposable
 
     private enum PlayerState { Stopped, Playing, Paused }
     private PlayerState _currentState;
-    private readonly MediaElement _mediaElement;
+    private readonly MediaPlayer _mediaElement;
     private readonly Queue<string> _playList = new();
 
-    public VideoPlayer(MediaElement mediaElement, EventHandler<Tuple<LogType, string>>? logger)
+    public VideoPlayer(MediaPlayer mediaElement, EventHandler<Tuple<LogType, string>>? logger)
     {
         _mediaElement = mediaElement;
         _mediaElement.MediaEnded += OnVideoEnded;

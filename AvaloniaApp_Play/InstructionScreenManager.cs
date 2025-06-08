@@ -1,15 +1,16 @@
 using System;
 using System.IO;
-using System.Windows;
 using System.Reflection;
-using System.Linq; 
+using System.Linq;
 using System.Threading.Tasks;
 using System.Drawing.Imaging;
-using Avalonia.Controls; 
+using Avalonia.Controls;
 using System.Runtime.Versioning;
 using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Labs.Gif;
+using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Avalonia.Threading;
 using AvaloniaApp_Play.Views;
@@ -22,9 +23,10 @@ using UDA.InstructionScreen.Shared.Entities;
 using UDA.Shared.Abstraction;
 using UDA.InstructionScreen.Shared.Entities.UI_Elements;
 using UDA.InstructionScreen.Helper;
-using Path = System.IO.Path; 
+using Path = System.IO.Path;
 using FontFamily = Avalonia.Media.FontFamily;
 using Image = Avalonia.Controls.Image;
+using BitmapImage = Avalonia.Media.Imaging.Bitmap;
 using Timer = System.Threading.Timer;
 
 namespace UDA.InstructionScreen.Capability;
@@ -471,20 +473,20 @@ public class InstructionScreenManager(ISettings settings)
                 }
             }
 
-            { //WebBrowser: This bracket to limit the scope of the content fields
-                if (element is WebBrowser webBrowser && webBrowser.IsVisible != false && requiredElements.All(elementName => elementName != webBrowser.Name))
+            { //GifImage: This bracket to limit the scope of the content fields
+                if (element is GifImage gifImage && gifImage.IsVisible != false && requiredElements.All(elementName => elementName != gifImage.Name))
                 {
                     var collapseElement = true;
 
-                    if (webBrowser.Tag is Dictionary<string, object?> storedDictionary &&
-                        (bool?)storedDictionary["NeverCollapse"] == true) //Get the stored data from the WebBrowser "Tag" property
+                    if (gifImage.Tag is Dictionary<string, object?> storedDictionary &&
+                        (bool?)storedDictionary["NeverCollapse"] == true) //Get the stored data from the GifImage "Tag" property
                     {
                         collapseElement = false;
                         storedDictionary["DisplayedUrl"] = null;
                     }
 
                     if (collapseElement)
-                        webBrowser.Visibility = Visibility.Collapsed;
+                        gifImage.IsVisible = false;
                 }
             }
 
@@ -527,7 +529,7 @@ public class InstructionScreenManager(ISettings settings)
             }
 
             { //Media: This bracket to limit the scope of the content fields
-                if (element is MediaElement mediaElement && mediaElement.Visibility != Visibility.Collapsed && requiredElements.All(elementName => elementName != mediaElement.Name))
+                if (element is MediaPlayer mediaElement && mediaElement.Visibility != Visibility.Collapsed && requiredElements.All(elementName => elementName != mediaElement.Name))
                 {
                     var collapseElement = true;
 
@@ -638,16 +640,16 @@ public class InstructionScreenManager(ISettings settings)
         }
         #endregion
 
-        #region Create WebBrowser Elements in the Grid
+        #region Create GifImage Elements in the Grid
         if (layout.GIF_Elements is not null && layout.GIF_Elements.Count > 0 && layout.ShowThisLayout)
         {
             foreach (var gifElement in layout.GIF_Elements)
-            { 
-                var webBrowser =  CreateWebBrowserElement(gifElement);
+            {
+                var gifImage =  CreateGifImageElement(gifElement);
 
-                grid.MapRowGridDefinition(gifElement, webBrowser);
-                grid.MapColumnGridDefinition(gifElement, webBrowser);
-                grid.Children.Add(webBrowser);
+                grid.MapRowGridDefinition(gifElement, gifImage);
+                grid.MapColumnGridDefinition(gifElement, gifImage);
+                grid.Children.Add(gifImage);
             }
         }
         #endregion
@@ -685,7 +687,7 @@ public class InstructionScreenManager(ISettings settings)
         {
             foreach (var element in layout.Media_Elements)
             { 
-                MediaElement mediaElement = CreateMediaElement(element);
+                MediaPlayer mediaElement = CreateMediaElement(element);
 
                 grid.MapRowGridDefinition(element, mediaElement, false);
                 grid.MapColumnGridDefinition(element, mediaElement,false);
@@ -715,40 +717,28 @@ public class InstructionScreenManager(ISettings settings)
         return newImg;
     }
     
-    //Use "WebBrowser" to support GIF
-    private static WebBrowser CreateWebBrowserElement(GIF_Element gifDetails)
+    //Create GifImage to display GIF
+    private static GifImage CreateGifImageElement(GIF_Element gifDetails)
     {
-        WebBrowser newWebBrowser = new();
-        gifDetails.MapName(newWebBrowser);
-        gifDetails.MapTag(newWebBrowser);
-        gifDetails.MapHeight(newWebBrowser);
-        gifDetails.MapWidth(newWebBrowser);
+        GifImage gifImage = new();
+        gifDetails.MapName(gifImage);
+        gifDetails.MapTag(gifImage);
+        gifDetails.MapHeight(gifImage);
+        gifDetails.MapWidth(gifImage);
 
         if (!string.IsNullOrEmpty(gifDetails.GifUrl))
         {
-            var html = gifDetails.GifUrl.GenerateHtmlCodeForGif(newWebBrowser.ActualWidth, newWebBrowser.ActualHeight);
+            gifImage.Source = new BitmapImage(gifDetails.GifUrl);
 
-            LoadCompletedEventHandler? onBlankLoaded = null;
-            onBlankLoaded = (_, e) =>
-            {
-                if (e.Uri != null && e.Uri.ToString() == "about:blank")
-                {
-                    newWebBrowser.LoadCompleted -= onBlankLoaded;
-                    newWebBrowser.NavigateToString(html);
-                }
-            };
-            newWebBrowser.LoadCompleted += onBlankLoaded;
-            newWebBrowser.Navigate("about:blank");
-
-            if (newWebBrowser.Tag is Dictionary<string, object?> storedDictionary) //Get the stored data from the image "Tag" property
+            if (gifImage.Tag is Dictionary<string, object?> storedDictionary)
                 storedDictionary["DisplayedUrl"] = gifDetails.GifUrl;
         }
 
-        gifDetails.MapMargins(newWebBrowser);
-        gifDetails.MapHorizontalAlignment(newWebBrowser);
-        gifDetails.MapVerticalAlignment(newWebBrowser);
+        gifDetails.MapMargins(gifImage);
+        gifDetails.MapHorizontalAlignment(gifImage);
+        gifDetails.MapVerticalAlignment(gifImage);
 
-        return newWebBrowser;
+        return gifImage;
     }
     
     private TextBlock CreateTextBlockElement(TextBlock_Element textBlockDetails)
@@ -804,18 +794,16 @@ public class InstructionScreenManager(ISettings settings)
         return newVlcControl;
     }
     
-    private MediaElement CreateMediaElement(Media_Element mediaDetails)
+    private MediaPlayer CreateMediaElement(Media_Element mediaDetails)
     {
-        MediaElement newMediaElement = new();
+        MediaPlayer newMediaElement = new();
         mediaDetails.MapName(newMediaElement);
-        
+
         VideoPlayer videoPlayer = new(newMediaElement, Logger);
         videoPlayer.ErrorOccurred += (errorMessage) => { FireNewError(ErrorCode.GENERAL_ERROR, $"Error in the VideoPlayer of the element '{mediaDetails.Name}'. Exception: {errorMessage}"); };
         
         mediaDetails.MapTag(videoPlayer, newMediaElement);
         newMediaElement.MapZIndex(mediaDetails);
-        newMediaElement.LoadedBehavior = MediaState.Manual;
-        newMediaElement.UnloadedBehavior = MediaState.Manual;
         newMediaElement.MapMargin(mediaDetails);
         newMediaElement.MapHeight(mediaDetails);
         newMediaElement.MapWidth(mediaDetails);
@@ -863,15 +851,15 @@ public class InstructionScreenManager(ISettings settings)
         }
         #endregion
 
-        #region Update WebBrowser Elements in the Grid
+        #region Update GifImage Elements in the Grid
         if (layout.GIF_Elements is not null && layout.GIF_Elements.Count > 0 && layout.ShowThisLayout)
         {
             foreach (var gifElement in layout.GIF_Elements)
             {
-                WebBrowser? webBrowser = grid.Children.OfType<WebBrowser>().FirstOrDefault(q => q.Name == gifElement.Name);
+                GifImage? gifImage = grid.Children.OfType<GifImage>().FirstOrDefault(q => q.Name == gifElement.Name);
 
-                if (webBrowser is not null)
-                    UpdateWebBrowserElement(webBrowser, gifElement, imageLanguage, grid);
+                if (gifImage is not null)
+                    UpdateGifImageElement(gifImage, gifElement, imageLanguage, grid);
                 else
                     FireNewError(ErrorCode.GENERAL_ERROR, $"#2 Didn't find an element in the Grid '{grid.Name}' with the name '{gifElement.Name}' and is to display GIF, please make sure to have an element in the '***_Layout.json' with such name.");
             }
@@ -972,18 +960,17 @@ public class InstructionScreenManager(ISettings settings)
             img.MapStretch( imgDetails);
         }
     }
-    private void UpdateWebBrowserElement(WebBrowser webBrowser, GIF_Element gifDetails, Language? imageLanguage, Grid grid)
+    private void UpdateGifImageElement(GifImage gifImage, GIF_Element gifDetails, Language? imageLanguage, Grid grid)
     {
         //If the "ImgUrlOrBase64" is GIF, it must be URL path not base64 (Not yet supported).
-        webBrowser.IsVisible = true;
-        webBrowser.IsHitTestVisible = false;
+        gifImage.IsVisible = true;
 
         if (_rerouteToLanguageFolder)
             gifDetails.GifUrl = gifDetails.GifUrl.RerouteToLanguageFolder(imageLanguage, _defaultLanguage);
 
         #region If the same URL is already displayed, return
         {
-            if (webBrowser.Tag is Dictionary<string, object?> storedDictionary) //Get the stored data from the image "Tag" property
+            if (gifImage.Tag is Dictionary<string, object?> storedDictionary) //Get the stored data from the image "Tag" property
             {
                 var displayedUrl = (string?)storedDictionary["DisplayedUrl"];
 
@@ -999,24 +986,12 @@ public class InstructionScreenManager(ISettings settings)
         {
             if (File.Exists(gifDetails.GifUrl))
             {
-                var html = gifDetails.GifUrl.GenerateHtmlCodeForGif(webBrowser.ActualWidth, webBrowser.ActualHeight);
+                gifImage.Source = new BitmapImage(gifDetails.GifUrl);
 
-                LoadCompletedEventHandler? onBlankLoaded = null;
-                onBlankLoaded = (_, e) =>
-                {
-                    if (e.Uri != null && e.Uri.ToString() == "about:blank")
-                    {
-                        webBrowser.LoadCompleted -= onBlankLoaded;
-                        webBrowser.NavigateToString(html);
-                    }
-                };
-                webBrowser.LoadCompleted += onBlankLoaded;
-                webBrowser.Navigate("about:blank");
-
-                if (webBrowser.Tag is Dictionary<string, object?> storedDictionary) //Get the stored data from the image "Tag" property
+                if (gifImage.Tag is Dictionary<string, object?> storedDictionary)
                     storedDictionary["DisplayedUrl"] = gifDetails.GifUrl;
 
-                UpdateHeightAndWidth(webBrowser, grid, gifDetails.MatchHeightWithOtherElementName, gifDetails.MatchWidthWithOtherElementName, "3","4");
+                UpdateHeightAndWidth(gifImage, grid, gifDetails.MatchHeightWithOtherElementName, gifDetails.MatchWidthWithOtherElementName, "3","4");
             }
             else
                 FireNewError(ErrorCode.GENERAL_ERROR, $"1- The value of the property 'GifUrl' is not valid as an Image path! GifUrl: {gifDetails.GifUrl}, Element Name: {gifDetails.Name}");
@@ -1026,11 +1001,11 @@ public class InstructionScreenManager(ISettings settings)
 
         if (gifDetails.UpdateElementProperties)
         {
-            gifDetails.MapMargin(webBrowser);
-            gifDetails.MapHeight(webBrowser);
-            gifDetails.MapWidth(webBrowser);
-            gifDetails.MapHorizontalAlignment(webBrowser);
-            gifDetails.MapVerticalAlignment(webBrowser);
+            gifDetails.MapMargin(gifImage);
+            gifDetails.MapHeight(gifImage);
+            gifDetails.MapWidth(gifImage);
+            gifDetails.MapHorizontalAlignment(gifImage);
+            gifDetails.MapVerticalAlignment(gifImage);
         }
     }
     private void UpdateTextBlockElement(TextBlock textBlock, TextBlock_Element textBlockDetails)
@@ -1152,7 +1127,7 @@ public class InstructionScreenManager(ISettings settings)
             vlcControl.MapVerticalAlignment(vlcControlDetails);
         }
     }
-    private void UpdateMediaElement(MediaElement mediaElement, Media_Element mediaDetails)
+    private void UpdateMediaElement(MediaPlayer mediaElement, Media_Element mediaDetails)
     {
         mediaElement.IsVisible = true;
 

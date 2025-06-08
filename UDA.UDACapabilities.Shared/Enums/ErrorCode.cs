@@ -1,0 +1,186 @@
+namespace UDA.UDACapabilities.Shared.Enums;
+public enum ErrorCode
+{
+    //There must be an error code group for each capability for example the document reader error codes should start with 20, face camera 21, the general start with 10
+    //The ErrorCodes should be negative if they are a stopping ErrorCodes and positive if they are warnings
+
+    NoError = 0,
+    GENERAL_ERROR = -5,
+    GeneralAvailabilityError = -4,
+    NullObject = -2,
+    SimulationError = -10,
+    GENERAL_WARNING = -11,
+
+    #region Document Reader
+
+    #endregion
+
+    FailedToObtainLicense = -31,
+    FontNotFound = -30,
+    FileNotFound = -29,
+    KeyNotFoundInDictionary = -28,
+    SharerInterfaceNotConnected = -27,
+    ArduinoGeneralError = -26,
+    DeviceRemoved = -19,
+    UpsideDown = -14,
+    Upright = -13,
+    ErrorInDeletingUser = -12,
+    CapturingFailed = -9,
+    FailedToCaptureLeftIris = -8,
+    FailedToCaptureRightIris = -7,
+    FailedToCaptureFace = -6,
+    UnableToConnectToArduino = -3,
+    ArduinoConnectingIsNull = -1,
+
+    NoRFID = 1,
+    NullConfig = 2,
+    AuthenticityFailed = 3,
+    CertificateExpired = 4,
+    CertificateRevoked = 5,
+    DeviceIsBusy = 6,
+    DeviceNotFound = 7,
+    ChipReaderNotFound = 8,
+    UnableToStartReading = 9,
+    NotInitialized = 10,
+    NoDocumentFound = 11,
+    DermalogSDKLicenseNotValid = 12, //The same property is in "UDA.SharedDermalog.Net4.8"
+    AllFingersAreSkipped = 13,
+    MissingFingerDetected = 14,
+    SimulatorAlreadyRunning = 15,
+    SelectedPreferedDeviceNotSupported = 16,
+    NullImage = 17,
+    ProcessCancelled = 18,
+    NullRequest = 19,
+    CardNotPresent = 20,
+    CardReadingFailed = 21,
+    InvalidPaciCard = 22,
+    ReadingInterrupted = 23,
+    CardCorrupted = 24,
+    IdNumberNotFound = 25,
+    NullLiveImage = 26,
+    NullFaceImage = 27,
+    DeviceAlreadyRunning = 28,
+    PropertyNotFound = 29,
+    Timeout = 30,
+    CouldNotUseGifWithTheUsedConfig = 31,
+    DirtyScanningArea = 32, //Warning
+    ReplaceSiliconeMembrane = 33, //HID FP scanner (warning)
+    NoFaceDetected = 34,
+    InvalidGccIdCard = 35,
+    InvalidDocumentData = 36,
+    InvalidDocumentImages = 37,
+    SpoofDetected = 38, //Warning
+    FailedGenerateWSQ = 39,
+
+
+    DermalogSdkError = 222,
+    ICamR100SdkError = 223,
+    IDataSdkError = 224,
+
+    ARHErros = 225,
+}
+
+public enum Dermalog_ErrorCode
+{
+    GENERAL_ERROR = -5,
+
+}
+
+public enum ICamR100_ErrorCode
+{
+    GENERAL_ERROR = -5,
+
+    IS_ERROR_NONE = 0,
+    IS_ERROR_UNOPEN = -1000000,
+    IS_ERROR_ALREADY_OPEN = -1000001,
+    IS_ERROR_CLOSE = -1000002,
+    IS_ERROR_COMMUNICATION = -1000003,
+    IS_ERROR_AUTHENTICATION = -1000004,
+    IS_ERROR_ICAM_FAILURE = -1000005,
+    IS_ERROR_PARAMETER = -1000006,
+    IS_ERROR_ICAM_RETURN = -1000007,
+    IS_ERROR_FEATURE_NOT_SUPPORT = -1000013,
+    IS_ERROR_NO_UPDATE_FILE = -1000014,
+    IS_ERROR_WRONG_SIZE_UPDATE_FILE = -1000015,
+    IS_ERROR_VOICE_FILES_NOT_FOUND = -1000021,
+    IS_ERROR_VOICE_FILES_DIR_EMPTY = -1000022,
+    IS_ERROR_UPDATE_PACKAGE = -1000023,
+    IS_ERROR_ICAM = -1000024,
+    IS_ERROR_TIMEOUT = -1000025,
+    IS_ERROR_FAIL_TO_OPEN_CONFIG = -1000026,
+    IS_ERROR_INVALID_ORDER = -1000027,
+    IS_ERROR_SYSTEM_BUSY = -1000030,
+    IS_ERROR_UNKNOWN = -1000033,
+    IS_ERRPR_FAIL_OPEN_DB = -1100000,
+    IS_ERROR_ALREADY_EXIST_USER_ID = -1100001,
+    IS_ERROR_NOT_EXIST_USER_ID = -1100002,
+    IS_ERROR_NOT_EMPTY_DB = -1100003,
+    IS_ERROR_EXCEED_DB = -1100004,
+    IS_ERROR_ALREADY_EXIST = -1100005,
+    IS_ERROR_LOW_QUALITY = -1100006,
+    IS_ERROR_CREATE_TEMPLATE = -1100007,
+    IS_FAIL_ALREADY_EXIST = -1001,
+    IS_FAIL_CAPTURE = -1002,
+    IS_FAIL_TIMEOUT = -1003,
+    IS_FAIL_ABORT = -1004,
+    IS_FAIL_MATCH = -1005,
+    IS_FAIL_LOW_QULITY = -1006,
+    IS_FAIL_CREATE_TEMPLATE = -1007,
+    IS_FAIL_IGNORE = -1008,
+    IS_FAIL_FAKE = -1009
+}
+
+public enum IData_ErrorCode
+{
+    GENERAL_ERROR = -5,
+
+    IAIRIS_ERROR_NONE = unchecked((int)0x00000000),
+    IAIRIS_ERROR_PARAMETER = unchecked((int)0x80010002),
+    IAIRIS_ERROR_BAD_IMAGE = unchecked((int)0x80010003),
+    IAIRIS_ERROR_LICENSE = unchecked((int)0x80010004),
+    IAIRIS_ERROR_SMALL_IRIS_SIZE = unchecked((int)0x80010005),
+    IAIRIS_ERROR_POOR_FOCUS = unchecked((int)0x80010006),
+    IAIRIS_ERROR_SMALL_VISIBLE_IRIS = unchecked((int)0x80010007),
+    IAIRIS_ERROR_LOW_TEXTURE = unchecked((int)0x80010008),
+    IAIRIS_ERROR_BIG_PUPIL = unchecked((int)0x80010009),
+    IAIRIS_ERROR_CREATE_IRISCODE = unchecked((int)0x80010010),
+    IAIRIS_ERROR_POOR_PUPIL_BOUNDARY = unchecked((int)0x80010011),
+    IAIRIS_ERROR_WEAK_LIMBUS = unchecked((int)0x80010012),
+    IAIRIS_ERROR_LESS_HORZ_MARGIN = unchecked((int)0x80010013),
+    IAIRIS_ERROR_LESS_VERT_MARGIN = unchecked((int)0x80010014),
+    IAIRIS_ERROR_GAZE_PRESENT = unchecked((int)0x80010015),
+    IAIRIS_ERROR_HEADROTATION_PRESENT = unchecked((int)0x80010016),
+    IAIRIS_ERROR_MAGNIFICATION_PRESENT = unchecked((int)0x80010017),
+    IAIRIS_ERROR_INTERLACE_PRESENT = unchecked((int)0x80010018),
+    IAIRIS_ERROR_EYENESS = unchecked((int)0x80010019),
+    IAIRIS_ERROR_POOR_DIRECTIONAL_FOCUS = unchecked((int)0x80010020),
+    IAIRIS_ERROR_POOR_GLSV = unchecked((int)0x80010021),
+    IAIRIS_ERROR_POOR_SNR = unchecked((int)0x80010022),
+    IAIRIS_ERROR_SMALL_PUPIL = unchecked((int)0x80010023),
+    IAIRIS_ERROR_HARD_CONTACT_LENS = unchecked((int)0x80010024),
+    IAIRIS_ERROR_PUPIL_SHAPE = unchecked((int)0x80010025),
+    IAIRIS_ERROR_GAZE_CANNOT_COMPUTE = unchecked((int)0x80010026),
+    IAIRIS_ERROR_CONTACT_LENS = unchecked((int)0x80010027),
+    IAIRIS_ERROR_UNKNOWN = unchecked((int)0x8001FFFF),
+    IAIRIS_NO_MATCH_FOUND = unchecked((int)0x80011001),
+    IAIRIS_NOT_SUPPORTED = unchecked((int)0x80011002),
+    IAIRIS_API_NOT_SUPPORTED = unchecked((int)0x80011013),
+    IAIRIS_SCALED_HD_SCORE_PARAM_NULL = unchecked((int)0x80012001),
+    IAIRIS_GALLERY_SIZE_NOT_IN_RANGE = unchecked((int)0x80012002),
+    IAIRIS_INPUT_HD_SCORE_NOT_IN_RANGE = unchecked((int)0x80012003),
+    IAIRIS_HD_THRESHOLD_PARAM_NULL = unchecked((int)0x80012004),
+    IAIRIS_OPERATING_PT_NOT_IN_RANGE = unchecked((int)0x80012005),
+    IAIRIS_INVALID_IMG_TRANSFORM = unchecked((int)0x80012006),
+    IAIRIS_DEVICE_UID_PARAM_NULL = unchecked((int)0x80012007),
+    IAIRIS_NUM_SUBTYPES_NOT_IN_RANGE = unchecked((int)0x80012008),
+    IAIRIS_NO_INPUT_IMAGES = unchecked((int)0x80012009),
+    IAIRIS_CONFLICTING_NUM_SUBTYPES = unchecked((int)0x8001200A),
+    IAIRIS_IMAGE_QUALITY_PARAM_NULL = unchecked((int)0x8001200B),
+    IAIRIS_IMAGE_SIZE_PARAM_NULL = unchecked((int)0x8001200C),
+    IAIRIS_IMAGE_IN_PARAM_NULL = unchecked((int)0x8001200D),
+    IAIRIS_IMAGE_OUT_PARAM_NULL = unchecked((int)0x8001200E),
+    IAIRIS_ISO_RECORD_SIZE_PARAM_NULL = unchecked((int)0x8001200F),
+    IAIRIS_ISO_RECORD_PARAM_NULL = unchecked((int)0x80012010),
+    IAIRIS_ISO_RECORD_SIZE_INVALID = unchecked((int)0x80012011),
+    IAIRIS_INVALID_SUBTYPE = unchecked((int)0x80012012),
+}

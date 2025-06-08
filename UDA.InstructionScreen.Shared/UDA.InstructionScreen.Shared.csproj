@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<Configurations>Debug;Release;egate-prod</Configurations>
+		<Platforms>AnyCPU;x86</Platforms>
+		<UseEgateDeploy>true</UseEgateDeploy>
+	</PropertyGroup>
+
+	<Import Project="..\Solution Items\Build\Common.props" />
+	<Import Project="..\Solution Items\Build\EgateDeploy.targets"
+			Condition="'$(UseEgateDeploy)' == 'true'" />
+
+	<ItemGroup>
+		<ProjectReference Include="..\UDA.UDACapabilities.Shared\UDA.UDACapabilities.Shared.csproj" />
+	</ItemGroup>
+
+	<Target Name="CopyAfterBuild" AfterTargets="AfterBuild">
+		<ItemGroup>
+			<ANTLR Include=".\InstructionImages\**\*.*" />
+		</ItemGroup>
+		
+		<Copy SourceFiles="@(ANTLR)" 
+			  DestinationFolder="..\..\UDA.Capabilities.SingleRepo\bin\InstructionImages\%(RecursiveDir)" />
+	</Target>
+
+</Project>

@@ -1,0 +1,61 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:AvaloniaApp_Play.ViewModels"
+        xmlns:gif="clr-namespace:Avalonia.Labs.Gif;assembly=Avalonia.Labs.Gif"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        x:Class="AvaloniaApp_Play.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        d:DesignWidth="400" d:DesignHeight="600"
+        Width="1048" Height="645"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="AvaloniaApp_Play"
+        TransparencyLevelHint="AcrylicBlur"
+        Background="Transparent"
+        ExtendClientAreaToDecorationsHint="True">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+    
+    <Window.Styles>
+        <Styles> 
+        </Styles>
+    </Window.Styles>
+    
+    <Grid ShowGridLines="True" Name="MainWindowGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="Header_RowDefinition" Height="2*" />
+            <RowDefinition x:Name="Body_RowDefinition"  Height="20*" />
+            <RowDefinition x:Name="Footer_RowDefinition"  Height="*" />
+        </Grid.RowDefinitions>
+        
+        <TextBlock Grid.Row="0"
+                   Name="Grid_Header" Text="Header" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+        <!-- Dynamically switch between GIF and Image :D 
+            I wrapped it in a view box because the layout 
+            system in avalonia is not applying to the GIf 
+            image object -->
+        <Viewbox Grid.Row="1" Width="300"
+                 Name="Grid_Body">
+            <ContentControl Content="{Binding ImageContent}">
+                <ContentControl.DataTemplates>
+                    
+                    <DataTemplate DataType="{x:Type Bitmap}">
+                        <Image Source="{Binding}"
+                               Stretch="Uniform"/>
+                    </DataTemplate>
+                    
+                    <DataTemplate DataType="{x:Type gif:GifImage}"> 
+                        <gif:GifImage Source="{Binding}" 
+                                 Stretch="Uniform"/> 
+                    </DataTemplate>
+                    
+                </ContentControl.DataTemplates>
+            </ContentControl>
+        </Viewbox>
+
+        <TextBlock Grid.Row="2"
+                   Name="Grid_Footer" Text="Footer" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    </Grid>
+</Window>

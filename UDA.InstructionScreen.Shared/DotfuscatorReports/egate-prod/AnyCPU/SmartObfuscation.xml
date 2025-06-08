@@ -1,0 +1,826 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE dotfuscatorSmartObfuscation SYSTEM "http://www.preemptive.com/dotfuscator/dtd/dotfuscatorSmartObfuscation_v1.0.dtd">
+<dotfuscatorSmartObfuscation version="1.0">
+    <header>
+        <timestamp>2025-04-09T09:52:39</timestamp>
+        <product version="7.1.2+4d78bce65e" user="M.Taha@diyarme.com">PreEmptive Protection Dotfuscator Professional</product>
+    </header>
+    <smartdetails>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>User Type</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from pruning</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::Topaz_TL460HSBR</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from pruning</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::Topaz_TL460HSBR</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from renaming</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::EpsonV600</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from pruning</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::EpsonV600</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from renaming</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::A6Scanner</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from pruning</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::A6Scanner</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from renaming</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::Arduino</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from pruning</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::Arduino</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from renaming</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::ArhOsmond</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from pruning</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::ArhOsmond</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from renaming</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::VF1</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from pruning</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::VF1</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from renaming</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::Palm3</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from pruning</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::Palm3</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from renaming</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::CanonCamera</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from renaming</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::ICamR100</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from pruning</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::ICamD2000</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from pruning</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::ICamD2000</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from renaming</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::CognitecFaceVACS</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from pruning</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::CognitecFaceVACS</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from renaming</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>User Type</itemtype>
+                <name>UDA.Shared.OperationStatusEnum</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from pruning</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.Shared.UpdateStatusDto`1::bool PrintMembers(System.Text.StringBuilder)</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>User Type</itemtype>
+                <name>UDA.Shared.OperationStatusEnum</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from renaming</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.Shared.UpdateStatusDto`1::bool PrintMembers(System.Text.StringBuilder)</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.Shared.OperationStatusEnum::value__</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from pruning</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.Shared.UpdateStatusDto`1::bool PrintMembers(System.Text.StringBuilder)</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.Shared.OperationStatusEnum::value__</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from renaming</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.Shared.UpdateStatusDto`1::bool PrintMembers(System.Text.StringBuilder)</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.Shared.OperationStatusEnum::Unidentified</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from pruning</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.Shared.UpdateStatusDto`1::bool PrintMembers(System.Text.StringBuilder)</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.Shared.OperationStatusEnum::Unidentified</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from renaming</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.Shared.UpdateStatusDto`1::bool PrintMembers(System.Text.StringBuilder)</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.Shared.OperationStatusEnum::InProgress</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from pruning</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.Shared.UpdateStatusDto`1::bool PrintMembers(System.Text.StringBuilder)</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.Shared.OperationStatusEnum::InProgress</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from renaming</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.Shared.UpdateStatusDto`1::bool PrintMembers(System.Text.StringBuilder)</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.Shared.OperationStatusEnum::Success</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from pruning</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.Shared.UpdateStatusDto`1::bool PrintMembers(System.Text.StringBuilder)</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.Shared.OperationStatusEnum::Success</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from renaming</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.Shared.UpdateStatusDto`1::bool PrintMembers(System.Text.StringBuilder)</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::ICamR100</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from renaming</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::CanonCamera</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from pruning</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::WebCam</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from renaming</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::WebCam</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from pruning</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>User Type</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from renaming</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::value__</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from pruning</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::value__</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from renaming</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::Undefined</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from pruning</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::Undefined</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from renaming</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::Simulation</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from pruning</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::Simulation</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from renaming</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::InstructionScreen</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from pruning</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::InstructionScreen</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from renaming</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::SmartCard_Kuwaiti</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from pruning</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::SmartCard_Kuwaiti</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from renaming</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::SmartCard_Saudi</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from pruning</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::SmartCard_Saudi</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from renaming</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::SmartCard_Bahraini</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from pruning</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::SmartCard_Bahraini</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from renaming</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::SmartCard_Qatari</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from pruning</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::SmartCard_Qatari</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from renaming</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::ZF2</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from renaming</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::ZF2</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from pruning</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::HidGuardian</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from renaming</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::HidGuardian</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from pruning</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::UareU4500</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from renaming</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::UareU4500</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from pruning</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.Shared.OperationStatusEnum::Failed</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from pruning</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.Shared.UpdateStatusDto`1::bool PrintMembers(System.Text.StringBuilder)</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::LF10</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from renaming</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::Regula7028M</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from renaming</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::Regula7028M</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from pruning</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::SmartCard_Omani</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from renaming</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::SmartCard_Omani</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from pruning</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::SmartCard_Emirati</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from renaming</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::SmartCard_Emirati</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from pruning</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.UDACapabilities.Shared.Enums.DeviceNameEnum::LF10</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from pruning</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.UDACapabilities.Shared.Entities.ImageDataDto::string get_UsedDeviceName()</reason>
+            </reasons>
+        </detail>
+        <detail warning="false">
+            <rule>EnumRule</rule>
+            <markeditem>
+                <itemtype>Field</itemtype>
+                <name>UDA.Shared.OperationStatusEnum::Failed</name>
+            </markeditem>
+            <operation>was excluded</operation>
+            <component>from renaming</component>
+            <reasons>
+                <reason>ToString() is invoked on this enum type in method UDA.Shared.UpdateStatusDto`1::bool PrintMembers(System.Text.StringBuilder)</reason>
+            </reasons>
+        </detail>
+    </smartdetails>
+</dotfuscatorSmartObfuscation>

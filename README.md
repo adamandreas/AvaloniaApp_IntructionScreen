@@ -9,7 +9,3 @@ This project demonstrates migrating a simple WPF design to Avalonia using the MV
 
 All DTO classes remain unchanged to preserve the existing data contract.
 
-## Prerequisites
-
-Building the project requires the **.NET 8 SDK**. The `global.json` file pins
-the expected SDK version so make sure `dotnet --version` returns 8.x.

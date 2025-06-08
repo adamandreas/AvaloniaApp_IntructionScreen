@@ -7,6 +7,9 @@ using Avalonia.Labs.Gif;
 
 namespace AvaloniaApp_Play.ViewModels;
 
+//Control UI here
+//
+
 public partial class MainWindowViewModel : ViewModelBase
 {
     public InstructionSectionViewModel HeaderSection { get; } = new();
@@ -18,11 +21,11 @@ public partial class MainWindowViewModel : ViewModelBase
         HeaderSection.ImageContent = new Bitmap("Assets/alex.png");
         HeaderSection.OverlayText = "Header";
 
-        BodySection.ImageContent = new Bitmap("Assets/alex.png");
-        BodySection.OverlayText = "Scan your document";
+        BodySection.ImageContent = new GifImage { Source = new Uri("avares://UDA.InstructionScreen/Assets/200w.gif") };
+        BodySection.OverlayText = "Body";
 
         FooterSection.ImageContent = new Bitmap("Assets/alex.png");
-        FooterSection.OverlayText = "Footer Info";
+        FooterSection.OverlayText = "Footer";
     }
 
     // Example1: the Hello world of this project

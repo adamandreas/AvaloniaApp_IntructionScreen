@@ -10,10 +10,10 @@
         <ContentControl Content="{Binding ImageContent}">
             <ContentControl.DataTemplates>
                 <DataTemplate DataType="{x:Type Bitmap}">
-                    <Image Source="{Binding}" Stretch="Uniform"/>
+                    <Image Source="{Binding}" Stretch="Fill"/>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type gif:GifImage}">
-                    <gif:GifImage Source="{Binding}" Stretch="Uniform"/>
+                    <gif:GifImage Source="{Binding}" Stretch="Fill"/>
                 </DataTemplate>
             </ContentControl.DataTemplates>
         </ContentControl>

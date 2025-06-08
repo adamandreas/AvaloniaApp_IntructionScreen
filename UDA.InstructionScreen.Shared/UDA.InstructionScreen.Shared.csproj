@@ -9,21 +9,8 @@
 		<UseEgateDeploy>true</UseEgateDeploy>
 	</PropertyGroup>
 
-	<Import Project="..\Solution Items\Build\Common.props" />
-	<Import Project="..\Solution Items\Build\EgateDeploy.targets"
-			Condition="'$(UseEgateDeploy)' == 'true'" />
-
 	<ItemGroup>
 		<ProjectReference Include="..\UDA.UDACapabilities.Shared\UDA.UDACapabilities.Shared.csproj" />
 	</ItemGroup>
-
-	<Target Name="CopyAfterBuild" AfterTargets="AfterBuild">
-		<ItemGroup>
-			<ANTLR Include=".\InstructionImages\**\*.*" />
-		</ItemGroup>
-		
-		<Copy SourceFiles="@(ANTLR)" 
-			  DestinationFolder="..\..\UDA.Capabilities.SingleRepo\bin\InstructionImages\%(RecursiveDir)" />
-	</Target>
 
 </Project>

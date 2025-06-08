@@ -1,0 +1,30 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:AvaloniaApp_Play.ViewModels"
+             xmlns:gif="clr-namespace:Avalonia.Labs.Gif;assembly=Avalonia.Labs.Gif"
+             x:Class="AvaloniaApp_Play.Views.InstructionSection"
+             x:DataType="vm:InstructionSectionViewModel">
+    
+    <Grid>
+        <!-- Image or GIF -->
+        <ContentControl Content="{Binding ImageContent}">
+            <ContentControl.DataTemplates>
+                <DataTemplate DataType="{x:Type Bitmap}">
+                    <Image Source="{Binding}" Stretch="Uniform"/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type gif:GifImage}">
+                    <gif:GifImage Source="{Binding}" Stretch="Uniform"/>
+                </DataTemplate>
+            </ContentControl.DataTemplates>
+        </ContentControl>
+
+        <!-- Optional text overlay -->
+        <TextBlock Text="{Binding OverlayText}"
+                   Foreground="White"
+                   FontSize="24"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   IsVisible="{Binding OverlayText}"/>
+    </Grid>
+
+</UserControl>

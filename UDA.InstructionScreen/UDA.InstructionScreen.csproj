@@ -9,6 +9,7 @@
         <LangVersion>12</LangVersion>
         <PublishSingleFile>true</PublishSingleFile>
         <DebugType>embedded</DebugType>
+        <RootNamespace>AvaloniaApp_Play</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

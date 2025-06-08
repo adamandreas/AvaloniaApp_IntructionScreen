@@ -1,0 +1,36 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:AvaloniaApp_Play.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:controls="clr-namespace:AvaloniaApp_Play.Views"
+        x:Class="AvaloniaApp_Play.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        d:DesignWidth="400" d:DesignHeight="600"
+        Width="1048" Height="645"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="UDA.InstructionScreen"
+        TransparencyLevelHint="AcrylicBlur"
+        Background="Transparent"
+        ExtendClientAreaToDecorationsHint="True">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+    
+    <Window.Styles>
+        <Styles> 
+        </Styles>
+    </Window.Styles>
+    
+    <Grid ShowGridLines="True" Name="MainWindowGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <controls:InstructionSection Grid.Row="0" DataContext="{Binding HeaderSection}"/>
+        <controls:InstructionSection Grid.Row="1" DataContext="{Binding BodySection}"/>
+        <controls:InstructionSection Grid.Row="2" DataContext="{Binding FooterSection}"/>
+    </Grid>
+</Window>

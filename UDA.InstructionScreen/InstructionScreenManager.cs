@@ -1,3 +1,4 @@
+/*
 using System;
 using System.IO;
 using System.Windows;
@@ -1483,3 +1484,4 @@ public class InstructionScreenManager(ISettings settings)
     }
     #endregion
 }
+*/

@@ -1,4 +1,4 @@
-using System;
+/*using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -674,14 +674,14 @@ public static class InstructionScreenHelper
                         overflow: hidden;
                     }}
                     body, img {{
-                        pointer-events: none;  /* Disable all interactions - any kind of mouse interactions*/
-                        user-select: none;     /* Disable selection - useful if you have text in the HTML */
+                        pointer-events: none;  /* Disable all interactions - any kind of mouse interactions#1#
+                        user-select: none;     /* Disable selection - useful if you have text in the HTML #1#
                     }}
                     div {{
                         display: flex;
                         justify-content: center;
                         align-items: center;
-                        height: 100vh;  /* Full viewport height */
+                        height: 100vh;  /* Full viewport height #1#
                     }}
                 </style>
             </head>
@@ -773,4 +773,4 @@ public static class InstructionScreenHelper
 
         return nameList;
     }
-}
+}*/

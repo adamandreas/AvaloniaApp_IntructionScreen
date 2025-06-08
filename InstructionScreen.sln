@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvaloniaApp_Play", "AvaloniaApp_Play\AvaloniaApp_Play.csproj", "{17BC56CC-3996-4985-9447-83EB7A6B8DB9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDA.InstructionScreen", "UDA.InstructionScreen\UDA.InstructionScreen.csproj", "{17BC56CC-3996-4985-9447-83EB7A6B8DB9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDA.Shared", "UDA.Shared\UDA.Shared.csproj", "{2F397769-0118-4BF6-8DAD-4EB1955766ED}"
 EndProject

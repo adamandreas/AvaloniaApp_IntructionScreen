@@ -30,7 +30,8 @@
         </Grid.RowDefinitions>
         
         <TextBlock Grid.Row="0"
-                   Name="Grid_Header" Text="Header" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                   Name="Grid_Header" Text="{Binding HeaderText}"
+                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
         <!-- Dynamically switch between GIF and Image :D 
             I wrapped it in a view box because the layout 
@@ -56,6 +57,7 @@
         </Viewbox>
 
         <TextBlock Grid.Row="2"
-                   Name="Grid_Footer" Text="Footer" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                   Name="Grid_Footer" Text="{Binding FooterText}"
+                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
     </Grid>
 </Window>

@@ -12,7 +12,11 @@ public partial class MainWindowViewModel : ViewModelBase
     [ObservableProperty]
     private object? imageContent;
 
-    private int height = 20;
+    [ObservableProperty]
+    private string headerText = "Header";
+
+    [ObservableProperty]
+    private string footerText = "Footer";
 
     public MainWindowViewModel()
     { 

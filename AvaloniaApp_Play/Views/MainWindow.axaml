@@ -29,17 +29,26 @@
             <RowDefinition x:Name="Footer_RowDefinition"  Height="*" />
         </Grid.RowDefinitions>
         
-        <TextBlock Grid.Row="0"
-                   Name="Grid_Header" Text="{Binding HeaderText}"
-                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <ContentControl Grid.Row="0" Name="Grid_Header" Content="{Binding HeaderContent}">
+            <ContentControl.DataTemplates>
+                <DataTemplate DataType="{x:Type string}">
+                    <TextBlock Text="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type Bitmap}">
+                    <Image Source="{Binding}" Stretch="Uniform"/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type gif:GifImage}">
+                    <gif:GifImage Source="{Binding}" Stretch="Uniform"/>
+                </DataTemplate>
+            </ContentControl.DataTemplates>
+        </ContentControl>
 
         <!-- Dynamically switch between GIF and Image :D 
             I wrapped it in a view box because the layout 
             system in avalonia is not applying to the GIf 
             image object -->
-        <Viewbox Grid.Row="1" Width="300"
-                 Name="Grid_Body">
-            <ContentControl Content="{Binding ImageContent}">
+        <Viewbox Grid.Row="1" Width="300" Name="Grid_Body">
+            <ContentControl Content="{Binding BodyContent}">
                 <ContentControl.DataTemplates>
                     
                     <DataTemplate DataType="{x:Type Bitmap}">
@@ -56,8 +65,18 @@
             </ContentControl>
         </Viewbox>
 
-        <TextBlock Grid.Row="2"
-                   Name="Grid_Footer" Text="{Binding FooterText}"
-                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <ContentControl Grid.Row="2" Name="Grid_Footer" Content="{Binding FooterContent}">
+            <ContentControl.DataTemplates>
+                <DataTemplate DataType="{x:Type string}">
+                    <TextBlock Text="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type Bitmap}">
+                    <Image Source="{Binding}" Stretch="Uniform"/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type gif:GifImage}">
+                    <gif:GifImage Source="{Binding}" Stretch="Uniform"/>
+                </DataTemplate>
+            </ContentControl.DataTemplates>
+        </ContentControl>
     </Grid>
 </Window>

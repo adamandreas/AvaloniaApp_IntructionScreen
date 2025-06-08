@@ -15,6 +15,7 @@ using Avalonia.Platform;
 using Avalonia.Threading;
 using AvaloniaApp_Play.Views;
 using Microsoft.Extensions.Configuration;
+using AvaloniaApp_Play.ViewModels;
 using Newtonsoft.Json; 
 using UDA.Shared;
 using UDA.UDACapabilities.Shared.Enums;
@@ -67,6 +68,7 @@ public class InstructionScreenManager(ISettings settings)
     private TextBlock? _countDownTextBlock; 
 
     #endregion
+    private MainWindowViewModel? _viewModel;
     #endregion
 
     public async Task InitAsync()
@@ -141,6 +143,8 @@ public class InstructionScreenManager(ISettings settings)
                     try
                     {
                         MainWindow = new();
+            _viewModel = new MainWindowViewModel();
+            MainWindow.DataContext = _viewModel;
                     }
                     catch (Exception e)
                     {
@@ -501,13 +505,13 @@ public class InstructionScreenManager(ISettings settings)
                 }
             }
 
-            { //VlcControl: This bracket to limit the scope of the content fields
-                if (element is VlcControl vlcControl && vlcControl.IsVisible != false && requiredElements.All(elementName => elementName != vlcControl.Name))
+            { //VideoView: This bracket to limit the scope of the content fields
+                if (element is VideoView vlcControl && vlcControl.IsVisible != false && requiredElements.All(elementName => elementName != vlcControl.Name))
                 {
                     var collapseElement = true;
 
                     if (vlcControl.Tag is Dictionary<string, object?> storedDictionary &&
-                        (bool?)storedDictionary["NeverCollapse"] == true) //Get the stored data from the VlcControl "Tag" property
+                        (bool?)storedDictionary["NeverCollapse"] == true) //Get the stored data from the VideoView "Tag" property
                     {
                         collapseElement = false;
 
@@ -668,16 +672,16 @@ public class InstructionScreenManager(ISettings settings)
         }
         #endregion
 
-        #region Create VlcControl ELements in the Grid
+        #region Create VideoView Elements in the Grid
         if (layout.VlcControl_Elements is not null && layout.VlcControl_Elements.Count > 0 && layout.ShowThisLayout)
         {
             foreach (var vlcControlElement in layout.VlcControl_Elements)
-            { 
-                VlcControl vlcControl = CreateVlcControlElement(vlcControlElement);
+            {
+                VideoView vlcControl = CreateVideoViewElement(vlcControlElement);
 
                 grid.MapRowGridDefinition(vlcControlElement, vlcControl, false);
                 grid.MapColumnGridDefinition(vlcControlElement, vlcControl, false);
-                grid.Children.Add(vlcControl); 
+                grid.Children.Add(vlcControl);
             }
         }
         #endregion
@@ -778,20 +782,20 @@ public class InstructionScreenManager(ISettings settings)
     }
     
     //To display RTSP stream using VLC media player (VLC should be installed on your machine)
-    private static VlcControl CreateVlcControlElement(VlcControl_Element vlcControlDetails)
+    private static VideoView CreateVideoViewElement(VlcControl_Element vlcControlDetails)
     {
-        VlcControl newVlcControl = new();
-        
-        newVlcControl.MapName(vlcControlDetails);
-        newVlcControl.MapTag(vlcControlDetails);
-        newVlcControl.MapZIndex(vlcControlDetails);
-        newVlcControl.MapMargins(vlcControlDetails);
-        newVlcControl.MapHeight(vlcControlDetails);
-        newVlcControl.MapWidth(vlcControlDetails);
-        newVlcControl.MapHorizontalAlignment(vlcControlDetails);
-        newVlcControl.MapVerticalAlignment(vlcControlDetails);
+        VideoView newVideoView = new();
 
-        return newVlcControl;
+        newVideoView.MapName(vlcControlDetails);
+        newVideoView.MapTag(vlcControlDetails);
+        newVideoView.MapZIndex(vlcControlDetails);
+        newVideoView.MapMargins(vlcControlDetails);
+        newVideoView.MapHeight(vlcControlDetails);
+        newVideoView.MapWidth(vlcControlDetails);
+        newVideoView.MapHorizontalAlignment(vlcControlDetails);
+        newVideoView.MapVerticalAlignment(vlcControlDetails);
+
+        return newVideoView;
     }
     
     private MediaPlayer CreateMediaElement(Media_Element mediaDetails)
@@ -886,10 +890,10 @@ public class InstructionScreenManager(ISettings settings)
         {
             foreach (var vlcControlElement in layout.VlcControl_Elements)
             {
-                VlcControl? vlcControl = grid.Children.OfType<VlcControl>().FirstOrDefault(q => q.Name == vlcControlElement.Name);
+                VideoView? vlcControl = grid.Children.OfType<VideoView>().FirstOrDefault(q => q.Name == vlcControlElement.Name);
 
                 if (vlcControl is not null)
-                    await UpdateVlcControlElement(vlcControl, vlcControlElement);
+                    await UpdateVideoViewElement(vlcControl, vlcControlElement);
                 else
                     FireNewError(ErrorCode.GENERAL_ERROR, $"#4 Didn't find an element in the Grid '{grid.Name}' with the name '{vlcControlElement.Name}', please make sure to have an element in the '***_Layout.json' with such name.");
             }
@@ -1031,12 +1035,12 @@ public class InstructionScreenManager(ISettings settings)
         textBlock.MapMargins(textBlockDetails);
         textBlock.MapPadding(textBlockDetails);
     }
-    private async Task UpdateVlcControlElement(VlcControl vlcControl, VlcControl_Element vlcControlDetails)
+    private async Task UpdateVideoViewElement(VideoView vlcControl, VlcControl_Element vlcControlDetails)
     {
         vlcControl.IsVisible = true;
 
         if (_config.EnableLogging)
-            Logger_Method(LogType.Debug, $"#1 Entered 'UpdateVlcControlElement()' vlcControlDetails: {JsonConvert.SerializeObject(vlcControlDetails)}");
+            Logger_Method(LogType.Debug, $"#1 Entered 'UpdateVideoViewElement()' vlcControlDetails: {JsonConvert.SerializeObject(vlcControlDetails)}");
 
         if (_config.EnableLogging)
             Logger_Method(LogType.Debug, $"#2 vlcControlDetails.RTSP_URL: {vlcControlDetails.RTSP_URL}");
@@ -1233,7 +1237,7 @@ public class InstructionScreenManager(ISettings settings)
     }
     #endregion
     
-    private async Task StopRtspStreamAsync(VlcControl vlcControl)
+    private async Task StopRtspStreamAsync(VideoView vlcControl)
     {
         try
         {
@@ -1437,6 +1441,13 @@ public class InstructionScreenManager(ISettings settings)
 
         if (duplicateStrings.Count > 0)
             FireNewError(ErrorCode.GENERAL_ERROR, $"The configured elements' names should be unique. The following names are duplicated {JsonConvert.SerializeObject(duplicateStrings)}");
+    }
+
+    // Helper methods to update the UI from the manager
+    public void SetHeaderContent(object? content) => _viewModel!.HeaderContent = content;
+    public void SetBodyContent(object? content) => _viewModel!.BodyContent = content;
+    public void SetFooterContent(object? content) => _viewModel!.FooterContent = content;
+
     }
  
     #endregion

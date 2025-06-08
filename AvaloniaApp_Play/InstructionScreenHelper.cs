@@ -15,6 +15,7 @@ using UDA.InstructionScreen.Shared.Entities.UI_Elements;
 using UDA.UDACapabilities.Shared;
 using UDA.UDACapabilities.Shared.Enums;
 using LibVLCSharp.Shared;
+using LibVLCSharp.Avalonia;
 using Avalonia.Labs.Gif;
 using Bitmap = Avalonia.Media.Imaging.Bitmap;
 using Color = Avalonia.Media.Color;
@@ -411,28 +412,32 @@ public static class InstructionScreenHelper
     }
     #endregion
     
-    #region VLC
-    public static void MapZIndex(this VlcControl vlcControl, VlcControl_Element gridDetails)
+    #region VideoView (replacement for VlcControl)
+    public static void MapZIndex(this VideoView videoView, VlcControl_Element gridDetails)
     {
-        Panel.SetZIndex(vlcControl, gridDetails.Z_Index);
+        Panel.SetZIndex(videoView, gridDetails.Z_Index);
     }
-    public static void MapMargins(this VlcControl vlcControl, VlcControl_Element gridDetails)
+
+    public static void MapMargins(this VideoView videoView, VlcControl_Element gridDetails)
     {
         if (gridDetails.Margin is not null && gridDetails.Margin.Count == 4)
-            vlcControl.Margin = new Thickness(gridDetails.Margin[0], gridDetails.Margin[1], gridDetails.Margin[2], gridDetails.Margin[3]);
+            videoView.Margin = new Thickness(gridDetails.Margin[0], gridDetails.Margin[1], gridDetails.Margin[2], gridDetails.Margin[3]);
     }
-    public static void MapHeight(this VlcControl vlcControl, VlcControl_Element gridDetails)
+
+    public static void MapHeight(this VideoView videoView, VlcControl_Element gridDetails)
     {
-        vlcControl.Height = gridDetails.Height is null || gridDetails.Height < 0 ? double.NaN : (double)gridDetails.Height;
+        videoView.Height = gridDetails.Height is null || gridDetails.Height < 0 ? double.NaN : (double)gridDetails.Height;
     }
-    public static void MapWidth(this VlcControl vlcControl, VlcControl_Element gridDetails)
+
+    public static void MapWidth(this VideoView videoView, VlcControl_Element gridDetails)
     {
-        vlcControl.Width = gridDetails.Width is null || gridDetails.Width < 0 ? double.NaN : (double)gridDetails.Width;
+        videoView.Width = gridDetails.Width is null || gridDetails.Width < 0 ? double.NaN : (double)gridDetails.Width;
     }
-    public static void MapVerticalAlignment(this VlcControl vlcControl, VlcControl_Element gridDetails)
+
+    public static void MapVerticalAlignment(this VideoView videoView, VlcControl_Element gridDetails)
     {
         if (gridDetails.VerticalAlignment is not null)
-            vlcControl.VerticalAlignment = gridDetails.VerticalAlignment switch
+            videoView.VerticalAlignment = gridDetails.VerticalAlignment switch
             {
                 1 => VerticalAlignment.Bottom,
                 3 => VerticalAlignment.Top,
@@ -440,10 +445,11 @@ public static class InstructionScreenHelper
                 _ => VerticalAlignment.Center
             };
     }
-    public static void MapHorizontalAlignment(this VlcControl vlcControl, VlcControl_Element gridDetails)
+
+    public static void MapHorizontalAlignment(this VideoView videoView, VlcControl_Element gridDetails)
     {
         if (gridDetails.HorizontalAlignment is not null)
-            vlcControl.HorizontalAlignment = gridDetails.HorizontalAlignment switch
+            videoView.HorizontalAlignment = gridDetails.HorizontalAlignment switch
             {
                 1 => HorizontalAlignment.Left,
                 3 => HorizontalAlignment.Right,
@@ -451,7 +457,8 @@ public static class InstructionScreenHelper
                 _ => HorizontalAlignment.Center
             };
     }
-    public static void MapTag(this VlcControl vlcControl, VlcControl_Element gridDetails)
+
+    public static void MapTag(this VideoView videoView, VlcControl_Element gridDetails)
     {
         // Set the Default properties in the "Tag" of the element
         Dictionary<string, object?> imgTagDictionary = new()
@@ -462,11 +469,12 @@ public static class InstructionScreenHelper
             { "StreamingOptions", gridDetails.StreamingOptions },
             { "NeverCollapse", gridDetails.NeverCollapse }
         };
-        vlcControl.Tag = imgTagDictionary; 
+        videoView.Tag = imgTagDictionary;
     }
-    public static void MapName(this VlcControl vlcControl, VlcControl_Element gridDetails)
-    { 
-        vlcControl.Name = gridDetails.Name;
+
+    public static void MapName(this VideoView videoView, VlcControl_Element gridDetails)
+    {
+        videoView.Name = gridDetails.Name;
     }
     #endregion
     

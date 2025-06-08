@@ -8,3 +8,4 @@ This project demonstrates migrating a simple WPF design to Avalonia using the MV
 - **LibVLCSharp.Avalonia** – enables video playback across platforms as a replacement for the WPF `MediaElement`.
 
 All DTO classes remain unchanged to preserve the existing data contract.
+

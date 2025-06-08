@@ -10,12 +10,12 @@ using Avalonia.Controls;
 using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
-using Microsoft.Win32;
 using UDA.InstructionScreen.Shared.Entities;
 using UDA.InstructionScreen.Shared.Entities.UI_Elements;
 using UDA.UDACapabilities.Shared;
 using UDA.UDACapabilities.Shared.Enums;
 using LibVLCSharp.Shared;
+using Avalonia.Labs.Gif;
 using Bitmap = Avalonia.Media.Imaging.Bitmap;
 using Color = Avalonia.Media.Color;
 using FontFamily = Avalonia.Media.FontFamily;
@@ -214,24 +214,24 @@ public static class InstructionScreenHelper
     #endregion
     
     #region MediaElement
-    public static void MapZIndex(this MediaElement mediaElement, Media_Element gridDetails)
+    public static void MapZIndex(this MediaPlayer mediaElement, Media_Element gridDetails)
     {
         Panel.SetZIndex(mediaElement, gridDetails.Z_Index);
     }
-    public static void MapMargin(this MediaElement mediaElement, Media_Element gridDetails)
+    public static void MapMargin(this MediaPlayer mediaElement, Media_Element gridDetails)
     {
         if (gridDetails.Margin is not null && gridDetails.Margin.Count == 4)
             mediaElement.Margin = new Thickness(gridDetails.Margin[0], gridDetails.Margin[1], gridDetails.Margin[2], gridDetails.Margin[3]);
     }
-    public static void MapHeight(this MediaElement mediaElement, Media_Element gridDetails)
+    public static void MapHeight(this MediaPlayer mediaElement, Media_Element gridDetails)
     {
         mediaElement.Height = gridDetails.Height is null || gridDetails.Height < 0 ? double.NaN : (double)gridDetails.Height;
     }
-    public static void MapWidth(this MediaElement mediaElement, Media_Element gridDetails)
+    public static void MapWidth(this MediaPlayer mediaElement, Media_Element gridDetails)
     {
         mediaElement.Width = gridDetails.Width is null || gridDetails.Width < 0 ? double.NaN : (double)gridDetails.Width;
     }
-    public static void MapHorizontalAlignment(this MediaElement mediaElement, Media_Element gridDetails)
+    public static void MapHorizontalAlignment(this MediaPlayer mediaElement, Media_Element gridDetails)
     {
         if (gridDetails.HorizontalAlignment is not null)
             mediaElement.HorizontalAlignment = gridDetails.HorizontalAlignment switch
@@ -242,7 +242,7 @@ public static class InstructionScreenHelper
                 _ => HorizontalAlignment.Center
             };
     }
-    public static void MapVerticalAlignment(this MediaElement mediaElement, Media_Element gridDetails)
+    public static void MapVerticalAlignment(this MediaPlayer mediaElement, Media_Element gridDetails)
     {
         if (gridDetails.VerticalAlignment is not null)
             mediaElement.VerticalAlignment = gridDetails.VerticalAlignment switch
@@ -253,7 +253,7 @@ public static class InstructionScreenHelper
                 _ => VerticalAlignment.Center
             };
     }
-    public static void MapTag(this Media_Element gridDetails, VideoPlayer videoPlayer, MediaElement newMediaElement)
+    public static void MapTag(this Media_Element gridDetails, VideoPlayer videoPlayer, MediaPlayer newMediaElement)
     {
         //Set the Default properties in the "Tag" of the element
         Dictionary<string, object?> imgTagDictionary = new()
@@ -267,7 +267,7 @@ public static class InstructionScreenHelper
         };
         newMediaElement.Tag = imgTagDictionary; 
     }
-    public static void MapName(this Media_Element gridDetails, MediaElement newMediaElement)
+    public static void MapName(this Media_Element gridDetails, MediaPlayer newMediaElement)
     {
         newMediaElement.Name = gridDetails.Name;
     }
@@ -470,11 +470,11 @@ public static class InstructionScreenHelper
     }
     #endregion
     
-    #region WebBrowser
-    public static void MapHorizontalAlignment(this GIF_Element gridDetails, WebBrowser newWebBrowser)
+    #region GifImage
+    public static void MapHorizontalAlignment(this GIF_Element gridDetails, GifImage newGif)
     {
         if (gridDetails.HorizontalAlignment is not null)
-            newWebBrowser.HorizontalAlignment = gridDetails.HorizontalAlignment switch
+            newGif.HorizontalAlignment = gridDetails.HorizontalAlignment switch
             {
                 1 => HorizontalAlignment.Left,
                 3 => HorizontalAlignment.Right,
@@ -482,10 +482,10 @@ public static class InstructionScreenHelper
                 _ => HorizontalAlignment.Center
             };
     }
-    public static void MapVerticalAlignment(this GIF_Element gridDetails, WebBrowser newWebBrowser)
+    public static void MapVerticalAlignment(this GIF_Element gridDetails, GifImage newGif)
     {
         if (gridDetails.VerticalAlignment is not null)
-            newWebBrowser.VerticalAlignment = gridDetails.VerticalAlignment switch
+            newGif.VerticalAlignment = gridDetails.VerticalAlignment switch
             {
                 1 => VerticalAlignment.Bottom,
                 3 => VerticalAlignment.Top,
@@ -493,20 +493,20 @@ public static class InstructionScreenHelper
                 _ => VerticalAlignment.Center
             };
     }
-    public static void MapHeight(this GIF_Element gridDetails, WebBrowser newWebBrowser)
+    public static void MapHeight(this GIF_Element gridDetails, GifImage newGif)
     {
-        newWebBrowser.Height = gridDetails.Height is null or < 0 ? double.NaN : (double)gridDetails.Height;
+        newGif.Height = gridDetails.Height is null or < 0 ? double.NaN : (double)gridDetails.Height;
     }
-    public static void MapWidth(this GIF_Element gridDetails, WebBrowser newWebBrowser)
+    public static void MapWidth(this GIF_Element gridDetails, GifImage newGif)
     {
-        newWebBrowser.Width = gridDetails.Width is null or < 0 ? double.NaN : (double)gridDetails.Width;
-    } 
-    public static void MapMargins(this GIF_Element gridDetails, WebBrowser newWebBrowser)
+        newGif.Width = gridDetails.Width is null or < 0 ? double.NaN : (double)gridDetails.Width;
+    }
+    public static void MapMargins(this GIF_Element gridDetails, GifImage newGif)
     {
         if (gridDetails.Margin is not null && gridDetails.Margin.Count == 4)
-            newWebBrowser.Margin = new Thickness(gridDetails.Margin[0], gridDetails.Margin[1], gridDetails.Margin[2], gridDetails.Margin[3]);
+            newGif.Margin = new Thickness(gridDetails.Margin[0], gridDetails.Margin[1], gridDetails.Margin[2], gridDetails.Margin[3]);
     }
-    public static void MapTag(this GIF_Element gridDetails, WebBrowser newWebBrowser)
+    public static void MapTag(this GIF_Element gridDetails, GifImage newGif)
     {
         // Set the Default properties in the "Tag" of the element
         Dictionary<string, object?> webBrowserTagDictionary = new()
@@ -516,16 +516,16 @@ public static class InstructionScreenHelper
             { "OriginalWidth", gridDetails.Width },
             { "NeverCollapse", gridDetails.NeverCollapse }
         };
-        newWebBrowser.Tag = webBrowserTagDictionary; 
+        newGif.Tag = webBrowserTagDictionary;
     }
-    public static void MapName(this GIF_Element gridDetails, WebBrowser newWebBrowser)
-    { 
-        newWebBrowser.Name = gridDetails.Name;
+    public static void MapName(this GIF_Element gridDetails, GifImage newGif)
+    {
+        newGif.Name = gridDetails.Name;
     }
-    public static void MapMargin(this GIF_Element gridDetails, WebBrowser newWebBrowser)
+    public static void MapMargin(this GIF_Element gridDetails, GifImage newGif)
     {
         if (gridDetails.Margin is not null && gridDetails.Margin.Count == 4)
-            newWebBrowser.Margin = new Thickness(gridDetails.Margin[0], gridDetails.Margin[1], gridDetails.Margin[2], gridDetails.Margin[3]);
+            newGif.Margin = new Thickness(gridDetails.Margin[0], gridDetails.Margin[1], gridDetails.Margin[2], gridDetails.Margin[3]);
     }
     #endregion
     
@@ -620,104 +620,6 @@ public static class InstructionScreenHelper
  
     #endregion
 
-    #region To disable touch in web view
-    public static string GenerateHtmlCodeForGif(this string gifUrlPath, double webBrowserActualWidth, double webBrowserActualHeight)
-    {
-        #region Calculate dev margin
-        double aspectRatio = 1.0;
-
-        try
-        {
-            using System.Drawing.Image img = System.Drawing.Image.FromFile(gifUrlPath);
-            aspectRatio = (double)img.Width / img.Height;
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Error reading image: " + ex.Message);
-        }
-
-        double imgWidth, imgHeight;
-        if (aspectRatio > 1.0)
-        {
-            imgWidth = webBrowserActualWidth;
-            imgHeight = webBrowserActualWidth / aspectRatio;
-
-            if (imgHeight > webBrowserActualHeight)
-            {
-                imgHeight = webBrowserActualHeight;
-                imgWidth = webBrowserActualHeight * aspectRatio;
-            }
-        }
-        else
-        {
-            imgHeight = webBrowserActualHeight;
-            imgWidth = webBrowserActualHeight * aspectRatio;
-
-            if (imgWidth > webBrowserActualWidth)
-            {
-                imgWidth = webBrowserActualWidth;
-                imgHeight = webBrowserActualWidth / aspectRatio;
-            }
-        }
-        #endregion
-
-        string encodedImgUrl = System.Web.HttpUtility.HtmlEncode(gifUrlPath);
-
-        SetWebBrowserVersionAndDisableZoom();
-
-        string html =
-            $@"<html>
-            <head>
-                <style>
-                    html, body {{
-                        margin: 0;
-                        overflow: hidden;
-                    }}
-                    body, img {{
-                        pointer-events: none;  /* Disable all interactions - any kind of mouse interactions*/
-                        user-select: none;     /* Disable selection - useful if you have text in the HTML */
-                    }}
-                    div {{
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        height: 100vh;  /* Full viewport height */
-                    }}
-                </style>
-            </head>
-            <body>
-                <div>
-                    <img src='{encodedImgUrl}' width='{imgWidth}' height='{imgHeight}' />
-                </div>
-            </body>
-        </html>";
-
-        return html;
-    }
-    private static void SetWebBrowserVersionAndDisableZoom()
-    {
-        string appName = Path.GetFileName(System.Diagnostics.Process.GetCurrentProcess().MainModule!.FileName);
-
-        try
-        {
-            // Set WebBrowser to use IE11 mode - added this because 7/8 break alignments
-            using (RegistryKey regKey = Registry.CurrentUser.CreateSubKey(@"Software\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION"))
-            {
-                regKey.SetValue(appName, 11001, RegistryValueKind.DWord);  // IE11 mode
-            }
-
-            // Disable zoom 
-            using (RegistryKey regKeyZoom = Registry.CurrentUser.CreateSubKey(@"Software\Microsoft\Internet Explorer\Zoom"))
-            {
-                regKeyZoom.SetValue("ZoomDisabled", 1, RegistryValueKind.DWord);  // Disable zoom
-            }
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Failed to set WebBrowser emulation version or disable zoom: " + ex.Message);
-        }
-    }
-    #endregion
     
     public static string? GetFullPath(this string? urlPath)
     {

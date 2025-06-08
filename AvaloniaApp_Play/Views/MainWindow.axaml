@@ -13,6 +13,10 @@
         Background="Transparent"
         ExtendClientAreaToDecorationsHint="True">
 
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+
     <Design.DataContext>
         <vm:MainWindowViewModel/>
     </Design.DataContext>

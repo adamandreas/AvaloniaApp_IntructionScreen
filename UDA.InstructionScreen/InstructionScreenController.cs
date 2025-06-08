@@ -1,4 +1,4 @@
-/*using UDA.InstructionScreen.Shared.Entities;
+using UDA.InstructionScreen.Shared.Entities;
 using UDA.Shared;
 using UDA.Shared.Abstraction;
 using UDA.UDACapabilities.Shared.Enums;
@@ -9,6 +9,7 @@ using System;
 using System.Runtime.Versioning;
 using System.Threading;
 using System.Threading.Tasks;
+using AvaloniaApp_Play.Views;
 using UDA.UDACapabilities.Shared.Constants;
 using UDA.InstructionScreen.Licensing;
 using UDA.UDACapabilities.Shared.Entities;
@@ -18,8 +19,7 @@ namespace UDA.InstructionScreen.Capability;
 
 [SupportedOSPlatform("windows")]
 public sealed class InstructionScreenController : CapabilityController<object?, StartupSettings, object?, object?, object?, object?, InstructionScreenController>
-{
-    #region Fields & Constructor
+{ 
     private Guid? _requestId;
     private readonly ConfigSettings _configSettings;
     private readonly InstructionScreenManager _instructionScreenManager;
@@ -28,8 +28,7 @@ public sealed class InstructionScreenController : CapabilityController<object?, 
 
     public InstructionScreenController(ILogger<InstructionScreenController> logger, ISettings settings,
         InstructionScreenManager instructionScreenManager) : base(logger)
-    {
-        #region Licensing
+    { 
         if (LicenseManager.Instance.LicenseDetails is not null &&
             LicenseManager.Instance.LicenseDetails.IsTimeLimited &&
             LicenseManager.Instance.LicenseDetails.ExpiryDate < DateTime.Now)
@@ -46,20 +45,13 @@ public sealed class InstructionScreenController : CapabilityController<object?, 
         {
             ErrorOccurred(ErrorCode.GeneralAvailabilityError, $"{LicenseCapabilitiesNames.INSTRUCTION_SCREEN}: General Availability Error");
             throw new Exception();
-        }
-        #endregion
-
+        } 
+        
         _instructionScreenManager = instructionScreenManager;
-
-        _configSettings = settings.Configuration
-            .GetSection("CapabilitySettings")
-            .GetSection("InstructionScreenConfig")
-            .GetSection("CapabilitySharedConfig")
-            .Get<ConfigSettings>();
+        _configSettings = settings.Configuration.GetSection("CapabilitySettings").GetSection("InstructionScreenConfig").GetSection("CapabilitySharedConfig").Get<ConfigSettings>()!;
 
         Logger_EventHandler(this, Tuple.Create(LogType.Debug, $"Created New Controller Instance. _configSettings: {JsonConvert.SerializeObject(_configSettings)}"));
     }
-    #endregion
 
     public override bool Init(InitRequestDto<object?> dto)
     {
@@ -102,7 +94,8 @@ public sealed class InstructionScreenController : CapabilityController<object?, 
                 if (_configSettings.EnableLogging)
                     Logger_EventHandler(this, Tuple.Create(LogType.Debug, $"Start(...) requestId: {_requestId}, StartupSettings: {System.Text.Json.JsonSerializer.Serialize(dto.Payload)}"));
 
-                DeviceStatusEnum deviceStatus = DeviceStatus;
+                var deviceStatus = DeviceStatus;
+                
                 if (deviceStatus is not DeviceStatusEnum.Ready)
                 {
                     Logger_EventHandler(this, Tuple.Create(LogType.Warning, $"Unable to Start: device status is '{deviceStatus}' it should be 'Ready'"));
@@ -110,13 +103,7 @@ public sealed class InstructionScreenController : CapabilityController<object?, 
                 }
 
                 UpdateDeviceStatus(DeviceStatusEnum.Busy, _configSettings.EnableLogging);
-
-                if (_configSettings.EnableLogging)
-                    Logger_EventHandler(this, Tuple.Create(LogType.Debug, $"Controller. Start(...) _instructionScreen_Manager.MainWindow is null?: {_instructionScreenManager.MainWindow}"));
-
-                if (_instructionScreenManager.MainWindow is not null)
-                    _instructionScreenManager.Start(dto.Payload);
-
+                _instructionScreenManager.Start(dto.Payload);
                 UpdateDeviceStatus(DeviceStatusEnum.Ready, _configSettings.EnableLogging);
 
                 return true;
@@ -146,16 +133,9 @@ public sealed class InstructionScreenController : CapabilityController<object?, 
                 }
 
                 UpdateDeviceStatus(DeviceStatusEnum.Busy);
-
-                Logger_EventHandler(this, Tuple.Create(LogType.Debug, $"Controller. _instructionScreen_Manager.MainWindow is null?: {_instructionScreenManager.MainWindow}"));
-
-                if (_instructionScreenManager.MainWindow is not null)
-                {
-                    Logger_EventHandler(this, Tuple.Create(LogType.Debug, $"Controller. Stop()"));
-
-                    _instructionScreenManager.Stop();
-                }
-
+  
+                Logger_EventHandler(this, Tuple.Create(LogType.Debug, $"Controller. Stop()"));
+                _instructionScreenManager.Stop();
                 UpdateDeviceStatus(DeviceStatusEnum.Undefined);
 
                 return true;
@@ -182,20 +162,14 @@ public sealed class InstructionScreenController : CapabilityController<object?, 
                 }
 
                 UpdateDeviceStatus(DeviceStatusEnum.Busy);
+ 
+                Logger_EventHandler(this, Tuple.Create(LogType.Debug, $"Controller. reinit: Stop()"));
+                _instructionScreenManager.Stop();
+                Logger_EventHandler(this, Tuple.Create(LogType.Debug, $"Controller. Init(config)."));
 
-                if (_instructionScreenManager.MainWindow is not null)
-                {
-                    Logger_EventHandler(this, Tuple.Create(LogType.Debug, $"Controller. reinit: Stop()"));
-
-                    _instructionScreenManager.Stop();
-
-                    Logger_EventHandler(this, Tuple.Create(LogType.Debug, $"Controller. Init(config)."));
-
-                    var task = _instructionScreenManager.InitAsync();
-                    while (!task.IsCompleted)
-                        Thread.Sleep(100);
-                }
-
+                var task = _instructionScreenManager.InitAsync();
+                while (!task.IsCompleted)  Thread.Sleep(100);
+                
                 UpdateDeviceStatus(DeviceStatusEnum.Ready);
 
                 return true;
@@ -215,10 +189,9 @@ public sealed class InstructionScreenController : CapabilityController<object?, 
 
     public override bool IsDeviceConnected()
     {
-        return InstructionScreenManager.IsExtraMonitorConnected();
+        return true; // Placeholder for actual device connection check logic
     }
-
-    #region Events Subscription
+    
     //Subscribe
     private void SubscribeEvents()
     {
@@ -231,6 +204,7 @@ public sealed class InstructionScreenController : CapabilityController<object?, 
         _instructionScreenManager.ProcessStarted += ProcessStarted_EventHandler;
         _instructionScreenManager.ProcessAborted += ProcessAborted_EventHandler;
         _instructionScreenManager.ErrorOccurred += ErrorOccurred_EventHandler;
+        
         //Events Just For Controller
         _instructionScreenManager.UpdateDeviceStatus += UpdateDeviceStatus_FiredEvent;
         _instructionScreenManager.Logger += Logger_EventHandler;
@@ -250,22 +224,17 @@ public sealed class InstructionScreenController : CapabilityController<object?, 
         _instructionScreenManager.ProcessStarted -= ProcessStarted_EventHandler;
         _instructionScreenManager.ProcessAborted -= ProcessAborted_EventHandler;
         _instructionScreenManager.ErrorOccurred -= ErrorOccurred_EventHandler;
+        
         //Events Just For Controller
         _instructionScreenManager.UpdateDeviceStatus -= UpdateDeviceStatus_FiredEvent;
         _instructionScreenManager.Logger -= Logger_EventHandler;
 
         _isSubscribed = false;
     }
-    #endregion
-
-    #region Shared Methods
+    
     public override void Dispose()
     {
         Logger_EventHandler(this, Tuple.Create(LogType.Debug, $"Controller. Entered Dispose()."));
-
-        //Never Stop() the InstructionScreen on this Dispose(). Since some implementations do not keep disposing and
-        //the Stop() and that closes the InstructionScreen window.
-
         UnsubscribeEvents();
     }
 
@@ -274,14 +243,12 @@ public sealed class InstructionScreenController : CapabilityController<object?, 
         ErrorOccurred_EventHandler(this, new() { ErrorCode = errorCode, ErrorMessage = $"{errorMessage}" });
     }
 
+    // todo do we really need this?
     private void Logger_EventHandler(object? sender, Tuple<LogType, string> args)
-        => _logger.Log(SharedHelper.UdaLogType_To_LogLevel(args.Item1), args.Item2);
-    #endregion
+        => _logger.LogDebug("logging");
 
     //===================================================================================================
-
-    #region Fire Agent "CallMeConnection" Events
-    #region Shared
+    
     private void DeviceInitialized_EventHandler(object? _, DeviceInitializedDataDto args)
     {
         Logger_EventHandler(this, Tuple.Create(LogType.Debug, $"DeviceInitialized_EventHandler(args)"));
@@ -303,6 +270,4 @@ public sealed class InstructionScreenController : CapabilityController<object?, 
         Logger_EventHandler(this, Tuple.Create(LogType.Error, $"ErrorOccurred_EventHandler: {JsonConvert.SerializeObject(args)}"));
         CallMeConnection.FireEvent(EventNameConstants.ERROR_OCCURRED, new SharedErrorEventArgs(args));
     }
-    #endregion
-    #endregion
-}*/
+}

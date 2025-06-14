@@ -17,7 +17,6 @@ using UDA.UDACapabilities.Shared;
 
 namespace UDA.InstructionScreen.Capability;
 
-[SupportedOSPlatform("windows")]
 public sealed class InstructionScreenController : CapabilityController<object?, StartupSettings, object?, object?, object?, object?, InstructionScreenController>
 { 
     private Guid? _requestId;
@@ -254,17 +253,20 @@ public sealed class InstructionScreenController : CapabilityController<object?, 
         Logger_EventHandler(this, Tuple.Create(LogType.Debug, $"DeviceInitialized_EventHandler(args)"));
         CallMeConnection.FireEvent(EventNameConstants.DEVICE_INITIALIZED, new DeviceInitializedEventArgs(args));
     }
+    
     private void ProcessStarted_EventHandler(object? _, EventArgs args)
     {
         if (_configSettings.EnableLogging)
             Logger_EventHandler(this, Tuple.Create(LogType.Debug, $"ProcessStarted_EventHandler(args)"));
         CallMeConnection.FireEvent(EventNameConstants.PROCESS_STARTED, args);
     }
+    
     private void ProcessAborted_EventHandler(object? _, EventArgs args)
     {
         Logger_EventHandler(this, Tuple.Create(LogType.Debug, $"ProcessAborted_EventHandler(args)"));
         CallMeConnection.FireEvent(EventNameConstants.PROCESS_ABORTED, args);
     }
+    
     private void ErrorOccurred_EventHandler(object? _, SharedErrorDataDto args)
     {
         Logger_EventHandler(this, Tuple.Create(LogType.Error, $"ErrorOccurred_EventHandler: {JsonConvert.SerializeObject(args)}"));

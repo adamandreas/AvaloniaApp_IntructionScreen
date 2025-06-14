@@ -1,10 +1,12 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:AvaloniaApp_Play.ViewModels"
+        xmlns:vm="using:AvaloniaApp_Play"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:controls="clr-namespace:AvaloniaApp_Play.Views"
+        xmlns:views="clr-namespace:AvaloniaApp_Play.Views"
+        xmlns:viewModels="clr-namespace:AvaloniaApp_Play.ViewModels"
+        xmlns:capability="clr-namespace:UDA.InstructionScreen.Capability"
         x:Class="AvaloniaApp_Play.Views.MainWindow"
-        x:DataType="vm:MainWindowViewModel"
+        x:DataType="capability:InstructionScreenManager"
         d:DesignWidth="400" d:DesignHeight="600"
         Width="1048" Height="645"
         Icon="/Assets/avalonia-logo.ico"
@@ -14,7 +16,7 @@
         ExtendClientAreaToDecorationsHint="True">
 
     <Design.DataContext>
-        <vm:MainWindowViewModel/>
+        <capability:InstructionScreenManager/>
     </Design.DataContext>
     
     <Window.Styles>
@@ -29,8 +31,8 @@
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
 
-        <controls:InstructionSection Grid.Row="0" DataContext="{Binding HeaderSection}"/>
-        <controls:InstructionSection Grid.Row="1" DataContext="{Binding BodySection}"/>
-        <controls:InstructionSection Grid.Row="2" DataContext="{Binding FooterSection}"/>
+        <views:InstructionSection Grid.Row="0" DataContext="{Binding HeaderSection}"/>
+        <views:InstructionSection Grid.Row="1" DataContext="{Binding BodySection}"/>
+        <views:InstructionSection Grid.Row="2" DataContext="{Binding FooterSection}"/>
     </Grid>
 </Window>

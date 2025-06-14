@@ -10,7 +10,7 @@ namespace AvaloniaApp_Play.ViewModels;
 //Control UI here
 //
 
-public partial class MainWindowViewModel : ViewModelBase
+public class MainWindowViewModel : ViewModelBase 
 {
     public InstructionSectionViewModel HeaderSection { get; } = new();
     public InstructionSectionViewModel BodySection { get; } = new();
@@ -18,15 +18,19 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public MainWindowViewModel()
     {
-        HeaderSection.ImageContent = new Bitmap("Assets/alex.png");
-        HeaderSection.OverlayText = "Header";
-
-        BodySection.ImageContent = new GifImage { Source = new Uri("avares://UDA.InstructionScreen/Assets/200w.gif") };
-        BodySection.OverlayText = "Body";
-
-        FooterSection.ImageContent = new Bitmap("Assets/alex.png");
-        FooterSection.OverlayText = "Footer";
+        
     }
+    //public MainWindowViewModel()
+    //{
+    //    // HeaderSection.ImageContent = new Bitmap("Assets/alex.png");
+    //    // HeaderSection.OverlayText = "Header";
+    //    // 
+    //    // BodySection.ImageContent = new GifImage { Source = new Uri("avares://UDA.InstructionScreen/Assets/200w.gif") };
+    //    // BodySection.OverlayText = "Body";
+    //    // 
+    //    // FooterSection.ImageContent = new Bitmap("Assets/alex.png");
+    //    // FooterSection.OverlayText = "Footer";
+    //}
 
     // Example1: the Hello world of this project
     // private async void StartAlternating()

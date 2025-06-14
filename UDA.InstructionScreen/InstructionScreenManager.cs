@@ -24,36 +24,38 @@ using UDA.UDACapabilities.Shared.Entities;
 using UDA.InstructionScreen.Shared.Entities;
 using UDA.Shared.Abstraction;
 using UDA.InstructionScreen.Shared.Entities.UI_Elements;
-// using UDA.InstructionScreen.Helper;
 using Path = System.IO.Path; 
 using FontFamily = Avalonia.Media.FontFamily;
 using Image = Avalonia.Controls.Image;
 using Timer = System.Threading.Timer;
+using System.Diagnostics.CodeAnalysis;
+using AvaloniaApp_Play.ViewModels;
+using UDA.InstructionScreen.Helper;
 
 namespace UDA.InstructionScreen.Capability;
 
-public class InstructionScreenManager(ISettings settings)
+public class InstructionScreenManager(ISettings settings) : ViewModelBase
 {
-
-    //To add a new element in the instruction screen search for "For new elements add the new implementation here." and add the elements following the same be way of other elements' implementation
- 
     //Shared
     public event EventHandler<DeviceInitializedDataDto>? DeviceInitialized;
     public event EventHandler? ProcessAborted;
     public event EventHandler? ProcessStarted;
     public event EventHandler<SharedErrorDataDto>? ErrorOccurred;
+    
     //Events Just For Controller
     public event EventHandler<DeviceStatusEnum>? UpdateDeviceStatus;
     public event EventHandler<Tuple<LogType, string>>? Logger;
     
-    private readonly ConfigSettings _config = settings.Configuration
+    private readonly ConfigSettings? _config = settings.Configuration
             .GetSection("CapabilitySettings")
             .GetSection("InstructionScreenConfig")
             .GetSection("CapabilitySharedConfig")
             .Get<ConfigSettings>();
+    
     private LayoutConfig? _layoutConfig;
-
-    public MainWindow? MainWindow;
+    public InstructionSectionViewModel HeaderSection { get; } = new();
+    public InstructionSectionViewModel BodySection { get; } = new();
+    public InstructionSectionViewModel FooterSection { get; } = new();
     private bool _rerouteToLanguageFolder;
     private string? _instructionImagesParentPath;
     private Language _defaultLanguage;
@@ -63,10 +65,69 @@ public class InstructionScreenManager(ISettings settings)
     private int _countdownSeconds;
     private Timer? _countDownTimer;
     private TextBlock? _countDownTextBlock;
- 
 
     public async Task InitAsync()
     {
+        
+        try
+        { 
+            try
+            {
+                var directoryName = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                if (_config?.ActiveLayoutJsonFileName is null)
+                    FireNewError(ErrorCode.NullConfig, $"The 'ActiveLayoutJsonFileName' in the appsettings is null.");
+                else
+                    _layoutConfig = JsonConvert.DeserializeObject<LayoutConfig>(await File.ReadAllTextAsync(Path.Combine(directoryName, _config.ActiveLayoutJsonFileName)));
+            }
+            catch (Exception ex)
+            {
+                FireNewError(ErrorCode.FileNotFound, $"Failed to read the layout config '{_config?.ActiveLayoutJsonFileName}'. Exception: {ex}");
+            }
+
+            if (_layoutConfig is null)
+                return; 
+            
+            _displayImageFormat = _config.DisplayImageFormat switch
+            {
+                1 => ImageFormat.Png,
+                2 => ImageFormat.Wmf,
+                3 => ImageFormat.Tiff,
+                4 => ImageFormat.Png,
+                5 => ImageFormat.MemoryBmp,
+                6 => ImageFormat.Jpeg,
+                7 => ImageFormat.Icon,
+                8 => ImageFormat.Exif,
+                9 => ImageFormat.Emf,
+                10 => ImageFormat.Bmp,
+                11 => ImageFormat.Gif,
+                _ => ImageFormat.Png
+            };
+
+            _rerouteToLanguageFolder = _config.RerouteToLanguageFolder;
+            _instructionImagesParentPath = _config.InstructionImagesParentPath.GetFullPath();
+
+            _defaultLanguage = _config.DefaultLanguage switch
+            {
+                (int)Language.English => Language.English,
+                (int)Language.Arabic => Language.Arabic,
+                _ => Language.ArAndEn
+            };
+
+            CheckForDuplicateNames(_layoutConfig.HeaderLayout, 
+                                   _layoutConfig.BodyLayout,
+                                   _layoutConfig.FooterLayout);
+
+            ValidateIndexes(_layoutConfig.HeaderLayout);
+            ValidateIndexes(_layoutConfig.BodyLayout);
+            ValidateIndexes(_layoutConfig.FooterLayout);
+        }
+        catch (Exception e)
+        {
+            UpdateDeviceStatusMethod(DeviceStatusEnum.Undefined);
+            FireNewError(ErrorCode.GENERAL_ERROR, $"Exception in Init(): {e}");
+        }
+        DeviceInitialized?.Invoke(this, new() { UsedDeviceNameEnum = DeviceNameEnum.InstructionScreen });
+        UpdateDeviceStatusMethod(DeviceStatusEnum.Ready);
     }
 
     public void Start(StartupSettings startupSettings)

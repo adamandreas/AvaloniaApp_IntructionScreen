@@ -6,9 +6,12 @@ using System.Linq;
 using Avalonia.Markup.Xaml;
 using AvaloniaApp_Play.ViewModels;
 using AvaloniaApp_Play.Views;
+using UDA.InstructionScreen.Capability;
 
 namespace AvaloniaApp_Play;
 
+
+// TODO remove this entry point. Add entry point to the manager, the way it were 
 public partial class App : Application
 {
     public override void Initialize()
@@ -23,7 +26,7 @@ public partial class App : Application
             DisableAvaloniaDataAnnotationValidation();
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new MainWindowViewModel(),
+                DataContext = new MainWindowViewModel(), 
             };
         }
 

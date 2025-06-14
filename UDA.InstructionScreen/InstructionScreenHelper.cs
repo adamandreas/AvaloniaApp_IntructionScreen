@@ -25,6 +25,22 @@ namespace UDA.InstructionScreen.Helper;
 
 public static class InstructionScreenHelper
 {
+    
+    
+    public static string? GetFullPath(this string? urlPath)
+    {
+        if (urlPath is null)
+            return null;
+
+        if (Path.IsPathRooted(urlPath)) //Absolute path
+            return urlPath;
+
+        //Relative path
+        var appDirectory = AppDomain.CurrentDomain.BaseDirectory;
+        var basePath = string.IsNullOrEmpty(urlPath) ? appDirectory : Path.Combine(appDirectory, urlPath);
+
+        return Path.GetFullPath(basePath);
+    }
 /*
 #region Grid
 public static void MapColumnGridDefinition(this Grid grid, GridDetails gridDetails, FrameworkElement element , bool checkCountGreaterThanColumnIndex=true)
@@ -720,20 +736,6 @@ private static void SetWebBrowserVersionAndDisableZoom()
 }
 #endregion
 
-public static string? GetFullPath(this string? urlPath)
-{
-    if (urlPath is null)
-        return null;
-
-    if (Path.IsPathRooted(urlPath)) //Absolute path
-        return urlPath;
-
-    //Relative path
-    string appDirectory = AppDomain.CurrentDomain.BaseDirectory;
-    string basePath = string.IsNullOrEmpty(urlPath) ? appDirectory : Path.Combine(appDirectory, urlPath);
-
-    return Path.GetFullPath(basePath);
-}
 public static string ManageThePathUrl(this string urlPath, string instructionImagesParentPath) => File.Exists(urlPath) ? Path.GetFullPath(urlPath) : Path.Combine(instructionImagesParentPath, urlPath);
 public static string? RerouteToLanguageFolder(this string? imageUrl, Language? imgLanguage, Language? defaultLanguage)
 {
